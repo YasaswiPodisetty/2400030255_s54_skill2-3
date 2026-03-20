@@ -2,24 +2,20 @@ package com.inventory.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import com.inventory.entity.Product;
 
 public class HibernateUtil {
 
-    private static final SessionFactory factory;
+    private static final SessionFactory sessionFactory;
 
     static {
-        try {
-            factory = new Configuration()
-                    .configure("hibernate.cfg.xml")
-                    .buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("SessionFactory creation failed.");
-            ex.printStackTrace();
-            throw new ExceptionInInitializerError(ex);
-        }
+        sessionFactory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Product.class)
+                .buildSessionFactory();
     }
 
     public static SessionFactory getSessionFactory() {
-        return factory;
+        return sessionFactory;
     }
 }
