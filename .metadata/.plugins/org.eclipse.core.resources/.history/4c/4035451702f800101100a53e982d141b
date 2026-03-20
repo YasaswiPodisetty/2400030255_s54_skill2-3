@@ -1,0 +1,5 @@
+package HibernateInventory;
+
+public class ProductDAO {
+
+}
